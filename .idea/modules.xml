@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/TaskTracker.iml" filepath="$PROJECT_DIR$/TaskTracker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task-client-module/task-client-module.iml" filepath="$PROJECT_DIR$/task-client-module/task-client-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task-server-module/task-server-module.iml" filepath="$PROJECT_DIR$/task-server-module/task-server-module.iml" />
+      <module fileurl="file://$PROJECT_DIR$/task-share-module/task-share-module.iml" filepath="$PROJECT_DIR$/task-share-module/task-share-module.iml" />
+    </modules>
+  </component>
+</project>
