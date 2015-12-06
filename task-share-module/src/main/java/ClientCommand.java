@@ -3,7 +3,7 @@
  */
 import java.io.Serializable;
 
-public class Command implements Serializable {
+public class ClientCommand implements Serializable {
 
     private static final long serialVersionUID = 8887001020159619356L;
 
@@ -14,7 +14,7 @@ public class Command implements Serializable {
     private Action action;
     private Object object;
 
-    public Command(Action action, Object object) {
+    public ClientCommand(Action action, Object object) {
         this.action = action;
         this.object = object;
     }

@@ -24,6 +24,7 @@ public class Controller {
 
             bos = new BufferedOutputStream(socket.getOutputStream());
             oos = new ObjectOutputStream(bos);
+            User user;
             boolean exit = false;
             String command;
             BufferedReader readerConsole = new BufferedReader(new InputStreamReader(System.in));
@@ -36,10 +37,51 @@ public class Controller {
                 if("1".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.USERCREATE);
                     command = readerConsole.readLine();
-
-                    //Введите ID
+                    user = new User(Integer.parseInt(command));
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNIN,user);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            exit=true;
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
                 } else if("2".equals(command.trim().toLowerCase())){
-                    //Регистрация нового ID
+                    thisView.printConsole(View.Help.USERCREATE);
+                    command = readerConsole.readLine();
+                    user = new User(Integer.parseInt(command));
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNIN,user);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            exit=true;
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
                 } else thisView.printConsole(View.Help.ERROR);
             }
 

@@ -6,20 +6,56 @@ import java.net.Socket;
  */
 public class MultiServer extends Thread {
     private Socket socket;
-    private BufferedReader in;
-    private PrintWriter out;
+    private User user;
+
 
     public MultiServer(Socket s) throws IOException{
         socket = s;
-        in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 
         start();
     }
 
     public void run(){
+        BufferedInputStream bis = null;
+        ObjectInputStream ois = null;
+        BufferedOutputStream bos = null;
+        ObjectOutputStream oos = null;
+
         try {
-        // Все действия тут
+            bis = new BufferedInputStream(socket.getInputStream());
+            ois = new ObjectInputStream(bis);
+            bos = new BufferedOutputStream(socket.getOutputStream());
+            oos = new ObjectOutputStream(bos);
+
+            while (true) {
+                try {
+                    Object readed = ois.readObject();
+                    if(readed instanceof ClientCommand) {
+                        ClientCommand command = (ClientCommand) readed;
+                        switch (command.getAction()) {
+                            case SIGNIN:
+                                user = (User) command.getObject();
+                                //Поиск юзера, если да - то продолжаем.
+
+                                break;
+                            case SIGNUP:
+                                User tempUser = (User) command.getObject();
+                                //Поиск юзера, если нет то создаем.
+
+                                break;
+                            case SIGNOUT:
+                                break;
+                        }
+                    }
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+
+                // Все действия тут
+            }
+
+            } catch (IOException e) {
+            e.printStackTrace();
         }
         finally {
             try {
@@ -28,5 +64,9 @@ public class MultiServer extends Thread {
                 System.out.println("Socket not closed");
             }
         }
+
+
+
+
     }
 }
