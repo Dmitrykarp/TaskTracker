@@ -13,5 +13,13 @@
     <packaging>jar</packaging>
     <name>task-client</name>
 
+    <dependencies>
+        <dependency>
+            <groupId>ru.karpenkodi.java</groupId>
+            <artifactId>task-share-module</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
