@@ -17,7 +17,9 @@ public class View {
         USERACCOUNT,
         WORKMENU,
         TASKCREATE,
-        TASKRENAME, GOTOUP,
+        TASKRENAME,
+        GOTOUP,
+        TASKACTION,
 
     }
 
@@ -43,6 +45,9 @@ public class View {
                 break;
             case GOTOUP:
                 System.out.println("(введите UP для выхода в корень всех задач)");
+                break;
+            case TASKACTION:
+                System.out.println("Введите <STOP> для остановки задачи!");
                 break;
             case WORKMENU:
                 System.out.println("Введите номер команды:");

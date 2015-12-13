@@ -216,8 +216,63 @@ public class Controller {
                     }
 
                 }else if("6".equals(command.trim().toLowerCase())){
+                    boolean tt=false;
+                    thisView.printConsole(View.Help.TASKCREATE);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    command = readerConsole.readLine();
+                    Task task = new Task(command);
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.TASKACTION, task);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            tt=true;
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
+                    //Ждем ввода СТОП
+
+                    while (!tt){
+                        thisView.printConsole(View.Help.TASKACTION);
+                        thisView.printConsole(View.Help.CONSOLE);
+                        command = readerConsole.readLine();
+                        if("stop".equals(command.trim().toLowerCase())){
+                            clientCommand = new ClientCommand(ClientCommand.Action.STOP);
+                            oos.writeObject(clientCommand);
+                            oos.flush();
+                            answer = null;
+                            try {
+                                answer = (ServerAnswer) ois.readObject();
+                            } catch (ClassNotFoundException e) {
+                                e.printStackTrace();
+                            }
+                            switch (answer.getType()){
+                                case SUCCESS:
+                                    System.out.println(answer.getMessage());
+                                    tt=true;
+                                    break;
+                                case FAILURE:
+                                    System.out.println(answer.getMessage());
+                                    break;
+                                default:
+                                    thisView.printConsole(View.Help.ERROR);
+                            }
+                        }
+                    }
 
                 }else if("7".equals(command.trim().toLowerCase())){
+                    
 
                 }else if("8".equals(command.trim().toLowerCase())){
                     exit=true;
