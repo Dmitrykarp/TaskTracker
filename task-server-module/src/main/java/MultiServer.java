@@ -9,6 +9,7 @@ public class MultiServer extends Thread {
     private Socket socket;
     private User user;
     private Model model;
+    Task taskUP = new Task("UP",-1);
     private Task taskUser;
 
 
@@ -40,7 +41,7 @@ public class MultiServer extends Thread {
                                 if (model.findEqualsUser(user)) {
                                     oos.writeObject(ServerAnswer.success("Вход выполнен!"));
                                     oos.flush();
-                                    taskUser = model.getTasks().get(0);
+                                    taskUser = taskUP;
                                 } else {
                                     oos.writeObject(ServerAnswer.failure("Пользователь не найден!"));
                                     oos.flush();
@@ -57,12 +58,12 @@ public class MultiServer extends Thread {
                                     oos.flush();
                                     user = tempUser;
                                     model.addUser(user);
-                                    taskUser = model.getTasks().get(0);
+                                    taskUser = taskUP;
                                 }
                                 break;
 
                             case GETTASKS:
-                                if (taskUser.equals(model.getTasks().get(0))) {
+                                if (taskUser.equals(taskUP)) {
                                     oos.writeObject(ServerAnswer.success(model.getTasks()));
                                     oos.flush();
                                 } else {
@@ -77,9 +78,9 @@ public class MultiServer extends Thread {
                                     oos.writeObject(ServerAnswer.failure("Задача с таким именем уже существует!"));
                                     oos.flush();
                                 } else {
-                                    int i = model.findMaxId();
+                                    int i = model.findMaxId(model.getTasks());
                                     newTask.setId(i +1);
-                                    if (taskUser.equals(model.getTasks().get(0))) {
+                                    if (taskUser.equals(taskUP)) {
                                         model.addTask(newTask);
                                     } else {
                                         taskUser.addTask(newTask);
@@ -92,7 +93,7 @@ public class MultiServer extends Thread {
                             case SELECTTASK:
                                 newTask = (Task) command.getObject();
                                 if("UP".equals(newTask.getName())){
-                                    taskUser=model.getTasks().get(0);
+                                    taskUser=taskUP;
                                     oos.writeObject(ServerAnswer.success("Выход выполнен!"));
                                     oos.flush();
                                     break;
@@ -131,10 +132,12 @@ public class MultiServer extends Thread {
                                     if (task.equals(model.getFindTask("Не работа", taskUser))){
                                         oos.writeObject(ServerAnswer.failure("Данную задачу нельзя переименовать или удалить!"));
                                         oos.flush();
-                                    }else {
+                                    }else if (taskUser.equals(taskUP)){
                                         model.dellTask(task);
                                         oos.writeObject(ServerAnswer.success("Задача удалена"));
                                         oos.flush();
+                                    }else {
+                                        taskUser.dellTask(task);
                                     }
 
                                 }else{

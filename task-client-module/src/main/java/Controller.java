@@ -11,6 +11,7 @@ public class Controller {
     ObjectInputStream ois = null;
     ObjectOutputStream oos = null;
 
+
     public Controller(Socket socket) {
         this.socket=socket;
     }
@@ -215,7 +216,6 @@ public class Controller {
                     }
 
                 }else if("6".equals(command.trim().toLowerCase())){
-
 
                 }else if("7".equals(command.trim().toLowerCase())){
 

@@ -71,6 +71,10 @@ public class Task implements Serializable {
         tasks.add(task);
     }
 
+    public void dellTask(Task task) {
+        tasks.remove(task);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

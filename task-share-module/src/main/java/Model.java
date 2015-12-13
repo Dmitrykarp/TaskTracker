@@ -45,16 +45,18 @@ public class Model {
         return tasks;
     }
 
-    public int findMaxId(){
+    public int findMaxId(ArrayList<Task> tasks1){
         int temp=0;
-        for(Task task: tasks){
+        for(Task task: tasks1){
             if(task.getTasks().isEmpty()){
                 if(task.getId()>temp) temp=task.getId();
             } else{
-                for (Task t: task.getTasks()){
+                temp=findMaxId(task.getTasks());
+
+                /*for (Task t: task.getTasks()){
                     temp=findMaxId();
                     if(t.getId()>temp) temp=t.getId();
-                }
+                }*/
             }
         }
         return temp;
@@ -62,7 +64,7 @@ public class Model {
 
     public boolean findTask(String name, Task tempTask){
         boolean b = false;
-        if (tempTask.equals(tasks.get(0))){
+        if (tempTask.equals(new Task("UP",-1))){
             for (Task task: tasks){
                     if(task.getName().equals(name)) {
                         b=true;
@@ -82,7 +84,7 @@ public class Model {
 
     public Task getFindTask (String name,Task tempTask){
         Task temp=null;
-        if (tempTask.equals(tasks.get(0))){
+        if (tempTask.equals(new Task("UP",-1))){
             for (Task task: tasks){
                     if(task.getName().equals(name)) {
                         temp=task;
