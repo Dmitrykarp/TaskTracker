@@ -1,12 +1,10 @@
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- * Created by Support on 06.12.2015.
- */
-public class Task {
+
+public class Task implements Serializable {
+    private static final long serialVersionUID = 8887001020159611234L;
     private String name;
     private int id;
     private ArrayList<Task> tasks= new ArrayList<Task>();
@@ -15,6 +13,10 @@ public class Task {
     public Task(String name, int id) {
         this.name = name;
         this.id = id;
+    }
+
+    public Task(String name){
+        this.name=name;
     }
 
     public String getName() {

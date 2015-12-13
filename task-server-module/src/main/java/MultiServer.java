@@ -22,6 +22,7 @@ public class MultiServer extends Thread {
         ObjectInputStream ois = null;
         ObjectOutputStream oos = null;
 
+
         try {
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
@@ -51,27 +52,50 @@ public class MultiServer extends Thread {
                                     oos.writeObject(ServerAnswer.failure("Такой пользователь существует!"));
                                     oos.flush();
                                 } else {
-                                    oos.writeObject(ServerAnswer.failure("Пользователь создан!"));
+                                    oos.writeObject(ServerAnswer.success("Пользователь создан!"));
                                     oos.flush();
                                     user = tempUser;
                                     model.addUser(user);
                                 }
-                                //Поиск юзера, если нет то создаем.
+
 
                                 break;
-                            case SIGNOUT:
+                            case GETTASKS:
+                                oos.writeObject(ServerAnswer.success(model.getTasks()));
+                                oos.flush();
+                                break;
+                            case CREATETASK:
+                                Task newTask = (Task) command.getObject();
+                                if(model.findTask(newTask.getName())){
+                                    oos.writeObject(ServerAnswer.failure("Задача с таким именем уже существует!"));
+                                    oos.flush();
+                                } else {
+                                    int i = model.findMaxId();
+                                    newTask.setId(i +1);
+                                    model.addTask(newTask);
+                                    oos.writeObject(ServerAnswer.success("Задача успешно создана!"));
+                                    oos.flush();
+                                }
+
                                 break;
                         }
+
+                        // Все действия тут
+
+
+
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                } catch (EOFException e){
+                    throw new SocketException();
                 }
 
-                // Все действия тут
+
             }
 
         }catch (SocketException e) {
-            System.out.println("Connect loss...");
+            System.out.println("Client disconnected. IP " + socket.getInetAddress());
 
         }catch (IOException e) {
             e.printStackTrace();

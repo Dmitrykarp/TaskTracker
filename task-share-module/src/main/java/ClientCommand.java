@@ -8,7 +8,7 @@ public class ClientCommand implements Serializable {
     private static final long serialVersionUID = 8887001020159619356L;
 
     public enum Action {
-        SIGNIN, SIGNOUT, SIGNUP
+        SIGNIN, SIGNOUT, SIGNUP, CREATETASK, GETTASKS
     }
 
     private Action action;
@@ -17,6 +17,10 @@ public class ClientCommand implements Serializable {
     public ClientCommand(Action action, Object object) {
         this.action = action;
         this.object = object;
+    }
+
+    public ClientCommand(Action action){
+        this.action = action;
     }
 
     public Action getAction() {

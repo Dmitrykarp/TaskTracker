@@ -12,7 +12,7 @@ public class ClientMain {
 
         Socket socket = new Socket(address,PORT);
         try{
-            System.out.println("Connect...");
+            System.out.println("Connect to Server: OK!");
             Controller controller = new Controller(socket);
 
             controller.run();

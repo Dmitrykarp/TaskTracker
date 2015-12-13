@@ -5,6 +5,7 @@ public class ServerAnswer implements Serializable {
     private static final long serialVersionUID = 4168691073568781445L;
     private Type type;
     private String message;
+    private Object object;
 
     public enum Type {
         SUCCESS, FAILURE, EXCEPTION
@@ -15,9 +16,15 @@ public class ServerAnswer implements Serializable {
         this.message = message;
     }
 
+    private ServerAnswer(Object object){
+        this.object=object;
+    }
+
     public static ServerAnswer success(String message) {
         return new ServerAnswer(Type.SUCCESS, message);
     }
+
+    public static ServerAnswer success(Object object) { return  new ServerAnswer(object);}
 
     public static ServerAnswer failure(String message) {
         return new ServerAnswer(Type.FAILURE, message);
@@ -33,6 +40,7 @@ public class ServerAnswer implements Serializable {
     public String getMessage() {
         return message;
     }
+    public Object getObject() { return  object;}
 
 
 

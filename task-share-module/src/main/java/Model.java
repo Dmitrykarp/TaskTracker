@@ -45,6 +45,40 @@ public class Model {
         return tasks;
     }
 
+    public int findMaxId(){
+        int temp=0;
+        for(Task task: tasks){
+            if(task.getTasks().isEmpty()){
+                if(task.getId()>temp) temp=task.getId();
+            } else{
+                for (Task t: task.getTasks()){
+                    temp=findMaxId();
+                    if(t.getId()>temp) temp=t.getId();
+                }
+            }
+        }
+        return temp;
+    }
+
+    public boolean findTask(String name){
+        boolean b = false;
+        for (Task task: tasks){
+            if(task.getTasks().isEmpty()){
+                if(task.getName().equals(name)) {
+                    b=true;
+                    break;
+                }
+            } else{
+                for (Task t: task.getTasks()){
+                    if(!b){
+                        b=findTask(name);
+                    }
+                }
+            }
+        }
+        return b;
+    }
+
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
