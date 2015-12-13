@@ -60,40 +60,48 @@ public class Model {
         return temp;
     }
 
-    public boolean findTask(String name){
+    public boolean findTask(String name, Task tempTask){
         boolean b = false;
-        for (Task task: tasks){
-            if(task.getTasks().isEmpty()){
+        if (tempTask.equals(tasks.get(0))){
+            for (Task task: tasks){
+                    if(task.getName().equals(name)) {
+                        b=true;
+                        break;
+                    }
+            }
+        }else{
+            for (Task task:tempTask.getTasks()){
                 if(task.getName().equals(name)) {
                     b=true;
                     break;
-                }
-            } else{
-                for (Task t: task.getTasks()){
-                    if(!b){
-                        b=findTask(name);
-                    }
                 }
             }
         }
         return b;
     }
 
-    public Task getFindTask (String name){
+    public Task getFindTask (String name,Task tempTask){
         Task temp=null;
-        for (Task task: tasks){
-            if(task.getTasks().isEmpty()){
+        if (tempTask.equals(tasks.get(0))){
+            for (Task task: tasks){
+                    if(task.getName().equals(name)) {
+                        temp=task;
+                        break;
+                    }
+            }
+        } else {
+            for (Task task:tempTask.getTasks()){
                 if(task.getName().equals(name)) {
                     temp=task;
                     break;
                 }
-            } else{
-                for (Task t: task.getTasks()){
-                      temp=getFindTask(name);
-                }
             }
         }
         return temp;
+    }
+
+    public void dellTask(Task task){
+        tasks.remove(task);
     }
 
     public void setTasks(ArrayList<Task> tasks) {

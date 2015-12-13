@@ -8,7 +8,6 @@ import java.util.ArrayList;
 public class Controller {
     private Socket socket;
     private View thisView = new View();
-    private ArrayList<Task> tasks = null;
     ObjectInputStream ois = null;
     ObjectOutputStream oos = null;
 
@@ -106,10 +105,37 @@ public class Controller {
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-                    tasks =(ArrayList<Task>) answer.getObject();
+                    ArrayList<Task> tasks =(ArrayList<Task>) answer.getObject();
                     thisView.printTask(tasks);
+                    //TODO Обновляет список после переподключения!!!
+
 
                 }else if("2".equals(command.trim().toLowerCase())){
+                    thisView.printConsole(View.Help.TASKCREATE);
+                    thisView.printConsole(View.Help.GOTOUP);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    command = readerConsole.readLine();
+                    Task task = new Task(command);
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SELECTTASK, task);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
+
 
                 }else if("3".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -135,7 +161,6 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
                 }else if("4".equals(command.trim().toLowerCase())){
                     String oldName, newName;
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -165,8 +190,32 @@ public class Controller {
                     }
 
                 }else if("5".equals(command.trim().toLowerCase())){
+                    thisView.printConsole(View.Help.TASKCREATE);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    command = readerConsole.readLine();
+                    Task task = new Task(command);
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.DELETETASK, task);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
 
                 }else if("6".equals(command.trim().toLowerCase())){
+
 
                 }else if("7".equals(command.trim().toLowerCase())){
 

@@ -9,6 +9,7 @@ public class MultiServer extends Thread {
     private Socket socket;
     private User user;
     private Model model;
+    private Task taskUser;
 
 
     public MultiServer(Socket s, Model m) throws IOException{
@@ -39,13 +40,13 @@ public class MultiServer extends Thread {
                                 if (model.findEqualsUser(user)) {
                                     oos.writeObject(ServerAnswer.success("Вход выполнен!"));
                                     oos.flush();
+                                    taskUser = model.getTasks().get(0);
                                 } else {
                                     oos.writeObject(ServerAnswer.failure("Пользователь не найден!"));
                                     oos.flush();
                                 }
-                                //Поиск юзера, если да - то продолжаем.
-
                                 break;
+
                             case SIGNUP:
                                 User tempUser = (User) command.getObject();
                                 if (model.findEqualsUser(tempUser)) {
@@ -56,39 +57,92 @@ public class MultiServer extends Thread {
                                     oos.flush();
                                     user = tempUser;
                                     model.addUser(user);
+                                    taskUser = model.getTasks().get(0);
                                 }
-
-
                                 break;
+
                             case GETTASKS:
-                                oos.writeObject(ServerAnswer.success(model.getTasks()));
-                                oos.flush();
+                                if (taskUser.equals(model.getTasks().get(0))) {
+                                    oos.writeObject(ServerAnswer.success(model.getTasks()));
+                                    oos.flush();
+                                } else {
+                                    oos.writeObject(ServerAnswer.success(taskUser.getTasks()));
+                                    oos.flush();
+                                }
                                 break;
+
                             case CREATETASK:
                                 Task newTask = (Task) command.getObject();
-                                if(model.findTask(newTask.getName())){
+                                if(model.findTask(newTask.getName(), taskUser)){
                                     oos.writeObject(ServerAnswer.failure("Задача с таким именем уже существует!"));
                                     oos.flush();
                                 } else {
                                     int i = model.findMaxId();
                                     newTask.setId(i +1);
-                                    model.addTask(newTask);
+                                    if (taskUser.equals(model.getTasks().get(0))) {
+                                        model.addTask(newTask);
+                                    } else {
+                                        taskUser.addTask(newTask);
+                                    }
                                     oos.writeObject(ServerAnswer.success("Задача успешно создана!"));
+                                    oos.flush();
+
+                                }
+                                break;
+                            case SELECTTASK:
+                                newTask = (Task) command.getObject();
+                                if("UP".equals(newTask.getName())){
+                                    taskUser=model.getTasks().get(0);
+                                    oos.writeObject(ServerAnswer.success("Выход выполнен!"));
+                                    oos.flush();
+                                    break;
+                                }
+                                if(model.findTask(newTask.getName(), taskUser)){
+                                    taskUser=model.getFindTask(newTask.getName(), taskUser);
+                                    oos.writeObject(ServerAnswer.success("Вход в задачу " +newTask.getName() +" выполнен!"));
+                                    oos.flush();
+                                } else {
+                                    oos.writeObject(ServerAnswer.failure("Задача не найдена!"));
                                     oos.flush();
                                 }
                                 break;
                             case RENAMETASK:
                                 String oldName = command.getOldName();
                                 String newName = command.getNewName();
-                                if(model.findTask(oldName)){
-                                    Task task = model.getFindTask(oldName);
-                                    task.setName(newName);
-                                    oos.writeObject(ServerAnswer.success("Задача переименована"));
-                                    oos.flush();
+                                if(model.findTask(oldName, taskUser)){
+                                    Task task = model.getFindTask(oldName, taskUser);
+                                    if (task.equals(model.getFindTask("Не работа",taskUser))){
+                                        oos.writeObject(ServerAnswer.failure("Данную задачу нельзя переименовать или удалить!"));
+                                        oos.flush();
+                                    }else {
+                                        task.setName(newName);
+                                        oos.writeObject(ServerAnswer.success("Задача переименована"));
+                                        oos.flush();
+                                    }
                                 }else{
                                     oos.writeObject(ServerAnswer.failure("Задача не найдена"));
                                     oos.flush();
                                 }
+                                break;
+                            case DELETETASK:
+                                Task t = (Task) command.getObject();
+                                if (model.findTask(t.getName(), taskUser)){
+                                    Task task = model.getFindTask(t.getName(),taskUser);
+                                    if (task.equals(model.getFindTask("Не работа", taskUser))){
+                                        oos.writeObject(ServerAnswer.failure("Данную задачу нельзя переименовать или удалить!"));
+                                        oos.flush();
+                                    }else {
+                                        model.dellTask(task);
+                                        oos.writeObject(ServerAnswer.success("Задача удалена"));
+                                        oos.flush();
+                                    }
+
+                                }else{
+                                    oos.writeObject(ServerAnswer.failure("Задача не найдена"));
+                                    oos.flush();
+                                }
+
+                                break;
                         }
 
                         // Все действия тут

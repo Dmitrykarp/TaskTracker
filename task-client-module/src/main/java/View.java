@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class View {
 
     View() {
-        System.out.println("Введите команду [help] для справки.");
+
     }
 
 
@@ -15,8 +15,9 @@ public class View {
         USERCREATE,
         ERROR,
         USERACCOUNT,
-        TASK,
-        WORKMENU, TASKCREATE, TASKRENAME,
+        WORKMENU,
+        TASKCREATE,
+        TASKRENAME, GOTOUP,
 
     }
 
@@ -40,10 +41,13 @@ public class View {
             case TASKRENAME:
                 System.out.println("Введите новое название:");
                 break;
+            case GOTOUP:
+                System.out.println("(введите UP для выхода в корень всех задач)");
+                break;
             case WORKMENU:
                 System.out.println("Введите номер команды:");
                 System.out.println("1) Получить список задач");
-                System.out.println("2) Выбрать задачу");
+                System.out.println("2) Выбрать корневую задачу");
                 System.out.println("3) Создать задачу");
                 System.out.println("4) Переименовать задачу");
                 System.out.println("5) Удалить задачу");
@@ -62,13 +66,8 @@ public class View {
 
     public void printTask(ArrayList<Task> tasks) {
         for (Task task: tasks){
-            if(!task.getTasks().isEmpty()){
-                printTask(task.getTasks());
-            }else{
-                System.out.println(task.getId() +" " +task.getName());
+            System.out.println(task.getId() +" " +task.getName());
             }
-
-        }
     }
 
 }
