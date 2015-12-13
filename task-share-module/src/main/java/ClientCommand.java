@@ -8,7 +8,7 @@ public class ClientCommand implements Serializable {
     private static final long serialVersionUID = 8887001020159619356L;
 
     public enum Action {
-        SIGNIN, RENAMETASK, SIGNUP, CREATETASK, DELETETASK, SELECTTASK, GETTASKS, TASKACTION, STOP
+        SIGNIN, RENAMETASK, SIGNUP, CREATETASK, DELETETASK, SELECTTASK, GETTASKS, TASKACTION, TASKSTAT, STOP
     }
 
     private Action action;

@@ -272,7 +272,21 @@ public class Controller {
                     }
 
                 }else if("7".equals(command.trim().toLowerCase())){
-                    
+                    thisView.printConsole(View.Help.TASKCREATE);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    command = readerConsole.readLine();
+                    Task task = new Task(command);
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.TASKSTAT, task);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    Task taskStat = (Task) answer.getObject();
+                    thisView.printStat(taskStat);
 
                 }else if("8".equals(command.trim().toLowerCase())){
                     exit=true;

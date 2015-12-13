@@ -169,6 +169,17 @@ public class MultiServer extends Thread {
                                     oos.flush();
                                 }
                                 break;
+                            case TASKSTAT:
+                                newTask = (Task) command.getObject();
+                                if(model.findTask(newTask.getName(), taskUser)){
+                                    Task task = model.getFindTask(newTask.getName(),taskUser);
+                                    oos.writeObject(ServerAnswer.success(task));
+                                    oos.flush();
+                                } else {
+                                    oos.writeObject(ServerAnswer.failure("Задача не найдена!"));
+                                    oos.flush();
+                                }
+                                break;
                         }
 
                         // Все действия тут

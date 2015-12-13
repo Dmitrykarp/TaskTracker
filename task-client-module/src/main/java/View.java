@@ -75,4 +75,10 @@ public class View {
             }
     }
 
+    public void printStat(Task taskStat) {
+        System.out.println("|    NAME    |    DATE   |  TIMER  |");
+        System.out.println("| " +taskStat.getName() +" | " +taskStat.getCalendar().getTime() +" | " + taskStat.getHistory());
+
+    }
+
 }
