@@ -1,3 +1,5 @@
+import org.omg.CosNaming.NamingContextPackage.NotFound;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -45,6 +47,18 @@ public class Task {
 
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    public Task getTask(int id){
+        Task tempTask=null;
+        for(Task t: tasks){
+            if(t.getId() == id){
+                tempTask=t;
+            }
+        }
+        if(tempTask == null){
+            throw new IllegalArgumentException();
+        }else return tempTask;
     }
 
     public void setTasks(ArrayList<Task> tasks) {

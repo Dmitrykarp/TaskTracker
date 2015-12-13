@@ -7,9 +7,7 @@ import java.net.Socket;
 public class Controller {
     private Socket socket;
     private View thisView = new View();
-    BufferedInputStream bis = null;
     ObjectInputStream ois = null;
-    BufferedOutputStream bos = null;
     ObjectOutputStream oos = null;
 
     public Controller(Socket socket) {
@@ -19,16 +17,13 @@ public class Controller {
     public void run() throws IOException {
 
         try {
-            bis = new BufferedInputStream(socket.getInputStream());
-            ois = new ObjectInputStream(bis);
-
-            bos = new BufferedOutputStream(socket.getOutputStream());
-            oos = new ObjectOutputStream(bos);
+            oos = new ObjectOutputStream(socket.getOutputStream());
+            ois = new ObjectInputStream(socket.getInputStream());
             User user;
             boolean exit = false;
             String command;
             BufferedReader readerConsole = new BufferedReader(new InputStreamReader(System.in));
-
+            System.out.println("While...");
             // Аутентификация User'а
             while (!exit){
                 thisView.printConsole(View.Help.USERACCOUNT);
@@ -62,7 +57,7 @@ public class Controller {
                     thisView.printConsole(View.Help.USERCREATE);
                     command = readerConsole.readLine();
                     user = new User(Integer.parseInt(command));
-                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNIN,user);
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNUP,user);
                     oos.writeObject(clientCommand);
                     oos.flush();
                     ServerAnswer answer = null;
@@ -88,10 +83,11 @@ public class Controller {
             exit = false;
 
             while (!exit){
+                
                 //Основная часть после аутентификации User'a
             }
         }catch (IOException e) {
-            // При ошибке ввода-вывода
+            System.out.println("Ошибка");
         } finally {
             //Закрываем потоки
         }
