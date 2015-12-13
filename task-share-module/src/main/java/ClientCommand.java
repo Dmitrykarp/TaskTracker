@@ -8,11 +8,12 @@ public class ClientCommand implements Serializable {
     private static final long serialVersionUID = 8887001020159619356L;
 
     public enum Action {
-        SIGNIN, SIGNOUT, SIGNUP, CREATETASK, GETTASKS
+        SIGNIN, RENAMETASK, SIGNUP, CREATETASK, GETTASKS
     }
 
     private Action action;
     private Object object;
+    private String oldName, newName;
 
     public ClientCommand(Action action, Object object) {
         this.action = action;
@@ -23,6 +24,12 @@ public class ClientCommand implements Serializable {
         this.action = action;
     }
 
+    public ClientCommand(Action action ,String oldName, String newName){
+        this.action=action;
+        this.oldName=oldName;
+        this.newName=newName;
+    }
+
     public Action getAction() {
         return action;
     }
@@ -31,4 +38,11 @@ public class ClientCommand implements Serializable {
         return object;
     }
 
+    public String getOldName() {
+        return oldName;
+    }
+
+    public String getNewName() {
+        return newName;
+    }
 }

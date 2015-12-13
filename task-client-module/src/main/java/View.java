@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * Created by Support on 06.12.2015.
  */
@@ -7,13 +9,14 @@ public class View {
         System.out.println("Введите команду [help] для справки.");
     }
 
+
     enum Help{
         CONSOLE,
         USERCREATE,
         ERROR,
         USERACCOUNT,
         TASK,
-        WORKMENU, TASKCREATE,
+        WORKMENU, TASKCREATE, TASKRENAME,
 
     }
 
@@ -34,6 +37,9 @@ public class View {
             case TASKCREATE:
                 System.out.println("Введите название задачи:");
                 break;
+            case TASKRENAME:
+                System.out.println("Введите новое название:");
+                break;
             case WORKMENU:
                 System.out.println("Введите номер команды:");
                 System.out.println("1) Получить список задач");
@@ -53,4 +59,16 @@ public class View {
 
         }
     }
+
+    public void printTask(ArrayList<Task> tasks) {
+        for (Task task: tasks){
+            if(!task.getTasks().isEmpty()){
+                printTask(task.getTasks());
+            }else{
+                System.out.println(task.getId() +" " +task.getName());
+            }
+
+        }
+    }
+
 }

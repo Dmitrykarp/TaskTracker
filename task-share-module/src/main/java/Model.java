@@ -79,6 +79,23 @@ public class Model {
         return b;
     }
 
+    public Task getFindTask (String name){
+        Task temp=null;
+        for (Task task: tasks){
+            if(task.getTasks().isEmpty()){
+                if(task.getName().equals(name)) {
+                    temp=task;
+                    break;
+                }
+            } else{
+                for (Task t: task.getTasks()){
+                      temp=getFindTask(name);
+                }
+            }
+        }
+        return temp;
+    }
+
     public void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

@@ -76,8 +76,19 @@ public class MultiServer extends Thread {
                                     oos.writeObject(ServerAnswer.success("Задача успешно создана!"));
                                     oos.flush();
                                 }
-
                                 break;
+                            case RENAMETASK:
+                                String oldName = command.getOldName();
+                                String newName = command.getNewName();
+                                if(model.findTask(oldName)){
+                                    Task task = model.getFindTask(oldName);
+                                    task.setName(newName);
+                                    oos.writeObject(ServerAnswer.success("Задача переименована"));
+                                    oos.flush();
+                                }else{
+                                    oos.writeObject(ServerAnswer.failure("Задача не найдена"));
+                                    oos.flush();
+                                }
                         }
 
                         // Все действия тут

@@ -107,11 +107,7 @@ public class Controller {
                         e.printStackTrace();
                     }
                     tasks =(ArrayList<Task>) answer.getObject();
-                    for (Task task:tasks){
-                        System.out.println(task.getId() +" " + task.getName());
-                    }
-                    //TODO Распечатать все команды
-
+                    thisView.printTask(tasks);
 
                 }else if("2".equals(command.trim().toLowerCase())){
 
@@ -141,6 +137,32 @@ public class Controller {
                     }
 
                 }else if("4".equals(command.trim().toLowerCase())){
+                    String oldName, newName;
+                    thisView.printConsole(View.Help.TASKCREATE);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    oldName = readerConsole.readLine();
+                    thisView.printConsole(View.Help.TASKRENAME);
+                    thisView.printConsole(View.Help.CONSOLE);
+                    newName = readerConsole.readLine();
+                    ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.RENAMETASK,oldName, newName);
+                    oos.writeObject(clientCommand);
+                    oos.flush();
+                    ServerAnswer answer = null;
+                    try {
+                        answer = (ServerAnswer) ois.readObject();
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    switch (answer.getType()){
+                        case SUCCESS:
+                            System.out.println(answer.getMessage());
+                            break;
+                        case FAILURE:
+                            System.out.println(answer.getMessage());
+                            break;
+                        default:
+                            thisView.printConsole(View.Help.ERROR);
+                    }
 
                 }else if("5".equals(command.trim().toLowerCase())){
 
