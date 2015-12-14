@@ -4,7 +4,6 @@ import java.util.ArrayList;
  * Created by Support on 06.12.2015.
  */
 public class Model {
-    //TODO Добавить поиск юзеров! ну и наполнить ее всю)))
     ArrayList<Task> tasks = new ArrayList<Task>();
     ArrayList<User> users = new ArrayList<User>();
 
@@ -53,10 +52,7 @@ public class Model {
             } else{
                 temp=findMaxId(task.getTasks());
 
-                /*for (Task t: task.getTasks()){
-                    temp=findMaxId();
-                    if(t.getId()>temp) temp=t.getId();
-                }*/
+
             }
         }
         return temp;
@@ -117,4 +113,5 @@ public class Model {
     public void setUsers(ArrayList<User> users) {
         this.users = users;
     }
+
 }

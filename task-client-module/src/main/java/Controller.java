@@ -38,7 +38,7 @@ public class Controller {
                     user = new User(Integer.parseInt(command));
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNIN,user);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -63,7 +63,7 @@ public class Controller {
                     user = new User(Integer.parseInt(command));
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SIGNUP,user);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -99,7 +99,7 @@ public class Controller {
                 if("1".equals(command.trim().toLowerCase())){
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.GETTASKS);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -108,8 +108,6 @@ public class Controller {
                     }
                     ArrayList<Task> tasks =(ArrayList<Task>) answer.getObject();
                     thisView.printTask(tasks);
-                    //TODO Обновляет список после переподключения!!!
-
 
                 }else if("2".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -119,7 +117,7 @@ public class Controller {
                     Task task = new Task(command);
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.SELECTTASK, task);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -136,7 +134,6 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
 
                 }else if("3".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -145,7 +142,7 @@ public class Controller {
                     Task task = new Task(command);
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.CREATETASK, task);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -162,6 +159,7 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
+
                 }else if("4".equals(command.trim().toLowerCase())){
                     String oldName, newName;
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -172,7 +170,7 @@ public class Controller {
                     newName = readerConsole.readLine();
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.RENAMETASK,oldName, newName);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -197,7 +195,7 @@ public class Controller {
                     Task task = new Task(command);
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.DELETETASK, task);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -223,7 +221,7 @@ public class Controller {
                     Task task = new Task(command);
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.TASKACTION, task);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -250,7 +248,7 @@ public class Controller {
                         if("stop".equals(command.trim().toLowerCase())){
                             clientCommand = new ClientCommand(ClientCommand.Action.STOP);
                             oos.writeObject(clientCommand);
-                            oos.flush();
+                            oos.reset();
                             answer = null;
                             try {
                                 answer = (ServerAnswer) ois.readObject();
@@ -278,7 +276,7 @@ public class Controller {
                     Task task = new Task(command);
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.TASKSTAT, task);
                     oos.writeObject(clientCommand);
-                    oos.flush();
+                    oos.reset();
                     ServerAnswer answer = null;
                     try {
                         answer = (ServerAnswer) ois.readObject();
@@ -292,7 +290,6 @@ public class Controller {
                     exit=true;
                 }else thisView.printConsole(View.Help.ERROR);
 
-                //Основная часть после аутентификации User'a
             }
         }catch (IOException e) {
             System.out.println("Ошибка");

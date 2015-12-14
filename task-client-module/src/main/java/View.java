@@ -1,10 +1,11 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
  * Created by Support on 06.12.2015.
  */
 public class View {
-
+    SimpleDateFormat format = new SimpleDateFormat("YYYY.MM.dd");
     View() {
 
     }
@@ -70,14 +71,17 @@ public class View {
     }
 
     public void printTask(ArrayList<Task> tasks) {
+        System.out.println("===============");
         for (Task task: tasks){
-            System.out.println(task.getId() +" " +task.getName());
+            System.out.println(task.getName());
             }
+        System.out.println("===============");
     }
 
     public void printStat(Task taskStat) {
-        System.out.println("|    NAME    |    DATE   |  TIMER  |");
-        System.out.println("| " +taskStat.getName() +" | " +taskStat.getCalendar().getTime() +" | " + taskStat.getHistory());
+        System.out.printf("| %10s | %10s | %10s | \n","NAME","DATE","TIMER");
+        System.out.printf("| %10s | %10s | %10s | \n",taskStat.getName(),format.format(taskStat.getCalendar().getTime()),taskStat.getHistory());
+
 
     }
 
