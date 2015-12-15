@@ -60,7 +60,7 @@ public class Model {
 
     public boolean findTask(String name, Task tempTask){
         boolean b = false;
-        if (tempTask.equals(new Task("UP",-1))){
+        if (tempTask.equals(new Task("PARENT",-1))){
             for (Task task: tasks){
                     if(task.getName().equals(name)) {
                         b=true;
@@ -80,7 +80,7 @@ public class Model {
 
     public Task getFindTask (String name,Task tempTask){
         Task temp=null;
-        if (tempTask.equals(new Task("UP",-1))){
+        if (tempTask.equals(new Task("PARENT",-1))){
             for (Task task: tasks){
                     if(task.getName().equals(name)) {
                         temp=task;

@@ -80,7 +80,7 @@ public class View {
 
     public void printStat(Task taskStat) {
         System.out.printf("| %10s | %10s | %10s | \n","NAME","DATE","TIMER");
-        System.out.printf("| %10s | %10s | %10s | \n",taskStat.getName(),format.format(taskStat.getCalendar().getTime()),taskStat.getHistory());
+        System.out.printf("| %10s | %10s | %10s | \n",taskStat.getName(),format.format(taskStat.getCalendar().getTime()),taskStat.getHistory().get(new User(1)).getLongDate());
 
 
     }

@@ -9,8 +9,9 @@ public class MultiServer extends Thread {
     private Socket socket;
     private User user;
     private Model model;
-    Task taskUP = new Task("UP",-1);
-    private Task taskUser;
+    private Task taskUP = new Task("PARENT",-1);  //Флаг корня
+    private Task userInTask;
+    private Timer tikTak;
 
 
     public MultiServer(Socket s, Model m) throws IOException{
@@ -23,7 +24,7 @@ public class MultiServer extends Thread {
     public void run() {
         ObjectInputStream ois = null;
         ObjectOutputStream oos = null;
-
+        tikTak = new Timer();
 
         try {
             oos = new ObjectOutputStream(socket.getOutputStream());
@@ -41,7 +42,7 @@ public class MultiServer extends Thread {
                                 if (model.findEqualsUser(user)) {
                                     oos.writeObject(ServerAnswer.success("Вход выполнен!"));
                                     oos.reset();
-                                    taskUser = taskUP;
+                                    userInTask = taskUP;
                                 } else {
                                     oos.writeObject(ServerAnswer.failure("Пользователь не найден!"));
                                     oos.reset();
@@ -58,32 +59,32 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                     user = tempUser;
                                     model.addUser(user);
-                                    taskUser = taskUP;
+                                    userInTask = taskUP;
                                 }
                                 break;
 
                             case GETTASKS:
-                                if (taskUser.equals(taskUP)) {
+                                if (userInTask.equals(taskUP)) {
                                     oos.writeObject(ServerAnswer.success(model.getTasks()));
                                     oos.reset();
                                 } else {
-                                    oos.writeObject(ServerAnswer.success(taskUser.getTasks()));
+                                    oos.writeObject(ServerAnswer.success(userInTask.getTasks()));
                                     oos.reset();
                                 }
                                 break;
 
                             case CREATETASK:
                                 Task newTask = (Task) command.getObject();
-                                if(model.findTask(newTask.getName(), taskUser)){
+                                if(model.findTask(newTask.getName(), userInTask)){
                                     oos.writeObject(ServerAnswer.failure("Задача с таким именем уже существует!"));
                                     oos.reset();
                                 } else {
                                     int i = model.findMaxId(model.getTasks());
                                     newTask.setId(i +1);
-                                    if (taskUser.equals(taskUP)) {
+                                    if (userInTask.equals(taskUP)) {
                                         model.addTask(newTask);
                                     } else {
-                                        taskUser.addTask(newTask);
+                                        userInTask.addTask(newTask);
                                     }
                                     oos.writeObject(ServerAnswer.success("Задача успешно создана!"));
                                     oos.reset();
@@ -92,16 +93,30 @@ public class MultiServer extends Thread {
                                 break;
                             case SELECTTASK:
                                 newTask = (Task) command.getObject();
-                                if("UP".equals(newTask.getName())){
-                                    taskUser=taskUP;
-                                    oos.writeObject(ServerAnswer.success("Выход выполнен!"));
+                                if (userInTask.equals(taskUP)){
+                                    tikTak.setEndDate();
+                                    tikTak.setLongDate();
+                                    model.getTasks().get(0).setOneHistory(user, tikTak);
+                                }
+
+                                if("UP".equals(newTask.getName()) && !taskUP.getName().equals(newTask.getName())){
+                                    tikTak.setEndDate();
+                                    tikTak.setLongDate();
+                                    userInTask.setOneHistory(user,tikTak);
+                                    userInTask =taskUP;
+                                    oos.writeObject(ServerAnswer.success("Вы находитесь в корне всех задач!"));
                                     oos.reset();
+                                    tikTak = new Timer();
                                     break;
                                 }
-                                if(model.findTask(newTask.getName(), taskUser)){
-                                    taskUser=model.getFindTask(newTask.getName(), taskUser);
+                                if(model.findTask(newTask.getName(), userInTask)){
+                                    tikTak.setEndDate();
+                                    tikTak.setLongDate();
+                                    userInTask.setOneHistory(user,tikTak);
+                                    userInTask =model.getFindTask(newTask.getName(), userInTask);
                                     oos.writeObject(ServerAnswer.success("Вход в задачу " +newTask.getName() +" выполнен!"));
                                     oos.reset();
+                                    tikTak = new Timer();
                                 } else {
                                     oos.writeObject(ServerAnswer.failure("Задача не найдена!"));
                                     oos.reset();
@@ -110,9 +125,9 @@ public class MultiServer extends Thread {
                             case RENAMETASK:
                                 String oldName = command.getOldName();
                                 String newName = command.getNewName();
-                                if(model.findTask(oldName, taskUser)){
-                                    Task task = model.getFindTask(oldName, taskUser);
-                                    if (task.equals(model.getFindTask("Не работа",taskUser))){
+                                if(model.findTask(oldName, userInTask)){
+                                    Task task = model.getFindTask(oldName, userInTask);
+                                    if (task.equals(model.getFindTask("Не работа", userInTask))){
                                         oos.writeObject(ServerAnswer.failure("Данную задачу нельзя переименовать или удалить!"));
                                         oos.reset();
                                     }else {
@@ -127,17 +142,17 @@ public class MultiServer extends Thread {
                                 break;
                             case DELETETASK:
                                 Task t = (Task) command.getObject();
-                                if (model.findTask(t.getName(), taskUser)){
-                                    Task task = model.getFindTask(t.getName(),taskUser);
-                                    if (task.equals(model.getFindTask("Не работа", taskUser))){
+                                if (model.findTask(t.getName(), userInTask)){
+                                    Task task = model.getFindTask(t.getName(), userInTask);
+                                    if (task.equals(model.getFindTask("Не работа", userInTask))){
                                         oos.writeObject(ServerAnswer.failure("Данную задачу нельзя переименовать или удалить!"));
                                         oos.reset();
-                                    }else if (taskUser.equals(taskUP)){
+                                    }else if (userInTask.equals(taskUP)){
                                         model.dellTask(task);
                                         oos.writeObject(ServerAnswer.success("Задача удалена"));
                                         oos.reset();
                                     }else {
-                                        taskUser.dellTask(task);
+                                        userInTask.dellTask(task);
                                     }
 
                                 }else{
@@ -147,8 +162,8 @@ public class MultiServer extends Thread {
                                 break;
                             case TASKACTION:
                                 newTask = (Task) command.getObject();
-                                if(model.findTask(newTask.getName(), taskUser)){
-                                    Task task = model.getFindTask(newTask.getName(),taskUser);
+                                if(model.findTask(newTask.getName(), userInTask)){
+                                    Task task = model.getFindTask(newTask.getName(), userInTask);
                                     Timer timer = new Timer();
                                     oos.writeObject(ServerAnswer.success("Задача активированна!"));
                                     oos.reset();
@@ -171,8 +186,8 @@ public class MultiServer extends Thread {
                                 break;
                             case TASKSTAT:
                                 newTask = (Task) command.getObject();
-                                if(model.findTask(newTask.getName(), taskUser)){
-                                    Task task = model.getFindTask(newTask.getName(),taskUser);
+                                if(model.findTask(newTask.getName(), userInTask)){
+                                    Task task = model.getFindTask(newTask.getName(), userInTask);
                                     oos.writeObject(ServerAnswer.success(task));
                                     oos.reset();
                                 } else {
@@ -181,11 +196,6 @@ public class MultiServer extends Thread {
                                 }
                                 break;
                         }
-
-                        // Все действия тут
-
-
-
                     }
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();

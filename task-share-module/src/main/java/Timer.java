@@ -23,12 +23,12 @@ public class Timer implements Serializable {
     }
 
     //TODO Перенести к клиенту, а тут возвращать просто LONG!
-    public long[] getLongDate() {
+    public String getLongDate() {
         long[] time = new long[3];
         time[0] = longDate / 86400000; //Days
         time[1] = (longDate / 3600000) - time[0]*24 ; //Hours
         time[2] = longDate / 60000 - time[1]*60; //Minutes
 
-        return time;
+        return time[0] +" д. " +time[1] +" ч. " +time[2] +" м.";
     }
 }
