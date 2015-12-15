@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class Controller {
     private Socket socket;
     private View thisView = new View();
+    private User thisUser;
     ObjectInputStream ois = null;
     ObjectOutputStream oos = null;
 
@@ -17,7 +18,6 @@ public class Controller {
     }
 
     public void run() throws IOException {
-
         try {
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
@@ -48,6 +48,7 @@ public class Controller {
                     switch (answer.getType()){
                         case SUCCESS:
                             System.out.println(answer.getMessage());
+                            thisUser=user;
                             exit=true;
                             break;
                         case FAILURE:
@@ -74,6 +75,7 @@ public class Controller {
                         case SUCCESS:
                             System.out.println(answer.getMessage());
                             exit=true;
+                            thisUser=user;
                             break;
                         case FAILURE:
                             System.out.println(answer.getMessage());
@@ -283,8 +285,11 @@ public class Controller {
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
+
+
                     Task taskStat = (Task) answer.getObject();
-                    thisView.printStat(taskStat);
+
+                    thisView.printStat(thisUser,taskStat);
 
                 }else if("8".equals(command.trim().toLowerCase())){
                     exit=true;

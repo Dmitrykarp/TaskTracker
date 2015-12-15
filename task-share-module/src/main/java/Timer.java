@@ -1,9 +1,6 @@
 import java.io.Serializable;
 import java.util.Calendar;
 
-/**
- * Created by Support on 06.12.2015.
- */
 public class Timer implements Serializable {
     private static final long serialVersionUID = 8812341020159611234L;
     private Calendar startDate;

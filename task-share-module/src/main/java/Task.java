@@ -10,7 +10,7 @@ public class Task implements Serializable {
     private int id;
     private Calendar calendar;
     private ArrayList<Task> tasks= new ArrayList<Task>();
-    private HashMap<User, Timer> history = new HashMap<User,Timer>();
+    private HashMap<User, ArrayList<Timer>> history = new HashMap<User,ArrayList<Timer>>();
 
     public Task(String name, int id) {
         this.name = name;
@@ -27,15 +27,22 @@ public class Task implements Serializable {
         return name;
     }
 
-    public HashMap<User, Timer> getHistory() {
+    public HashMap<User, ArrayList<Timer>> getHistory() {
         return history;
     }
 
     public void setOneHistory(User u, Timer t){
-        history.put(u, t);
+        if(history.containsKey(u)) {
+            history.get(u).add(t);
+        } else{
+            ArrayList<Timer> list = new ArrayList<Timer>();
+            list.add(t);
+            history.put(u, list);
+        }
+
     }
 
-    public void setHistory(HashMap<User, Timer> history) {
+    public void setHistory(HashMap<User, ArrayList<Timer>> history) {
         this.history = history;
     }
 

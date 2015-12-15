@@ -78,9 +78,27 @@ public class View {
         System.out.println("===============");
     }
 
-    public void printStat(Task taskStat) {
-        System.out.printf("| %10s | %10s | %10s | \n","NAME","DATE","TIMER");
-        System.out.printf("| %10s | %10s | %10s | \n",taskStat.getName(),format.format(taskStat.getCalendar().getTime()),taskStat.getHistory().get(new User(1)).getLongDate());
+    public void printStat(User u,Task taskStat) {
+       if (taskStat == null){
+           System.out.println("Задача не найдена.");
+       }else {
+           ArrayList<Timer> temp = taskStat.getHistory().get(u);
+           if (temp == null){
+               System.out.println("Нет данных для вывода.");
+           }else {
+               System.out.println("=======================================================");
+               System.out.printf("| %15s | %15s | %15s | \n","NAME","DATE","TIMER");
+
+               for (Timer t: temp){
+                   System.out.printf("| %15s | %15s | %15s | \n"
+                           ,taskStat.getName()
+                           ,format.format(taskStat.getCalendar().getTime())
+                           ,t.getLongDate());
+               }
+               System.out.println("=======================================================");
+           }
+       }
+
 
 
     }
