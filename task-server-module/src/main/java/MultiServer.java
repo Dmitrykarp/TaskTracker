@@ -215,6 +215,7 @@ public class MultiServer extends Thread {
         }
         finally {
             try {
+                new Utils().saveModel(model);
                 socket.close();
             } catch (IOException e) {
                 System.out.println("Socket not closed");

@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Model {
+public class Model implements Serializable {
     ArrayList<Task> tasks = new ArrayList<Task>();
     ArrayList<User> users = new ArrayList<User>();
 

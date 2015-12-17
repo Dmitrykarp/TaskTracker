@@ -5,11 +5,11 @@ import java.net.Socket;
 public class ServerMain {
     static final int PORT=37777;
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         ServerSocket s = new ServerSocket(PORT);
         System.out.println("Server RUN");
-        Model thisModel = new Model();
-        thisModel.addTask(new Task("Не работа", 0));
+        Model thisModel = new Utils().loadModel();
+
 
         try {
             while (true){
