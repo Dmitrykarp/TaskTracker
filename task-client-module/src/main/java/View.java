@@ -21,7 +21,8 @@ public class View {
         TASKRENAME,
         GOTOUP,
         TASKACTION,
-        DISCONNECT
+        DISCONNECT,
+        NUMBERFORMAT
 
     }
 
@@ -58,12 +59,14 @@ public class View {
                 System.out.println("3) Создать задачу");
                 System.out.println("4) Переименовать задачу");
                 System.out.println("5) Удалить задачу");
-                System.out.println("6) Активировать задачу");
-                System.out.println("7) Статистика");
-                System.out.println("8) Выход");
+                System.out.println("6) Статистика");
+                System.out.println("7) Выход");
                 break;
             case ERROR:
                 System.out.println("Ошибка!");
+                break;
+            case NUMBERFORMAT:
+                System.out.println("ID должен состоять только из цифр, максимальное значение: " +Integer.MAX_VALUE);
                 break;
             case DISCONNECT:
                 System.out.println("Сервер разорвал соединение.");

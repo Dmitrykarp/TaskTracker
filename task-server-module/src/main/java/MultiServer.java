@@ -153,34 +153,12 @@ public class MultiServer extends Thread {
                                         oos.reset();
                                     }else {
                                         userInTask.dellTask(task);
+                                        oos.writeObject(ServerAnswer.success("Задача удалена"));
+                                        oos.reset();
                                     }
 
                                 }else{
                                     oos.writeObject(ServerAnswer.failure("Задача не найдена"));
-                                    oos.reset();
-                                }
-                                break;
-
-                            case TASKACTION:
-                                newTask = (Task) command.getObject();
-                                if(model.findTask(newTask.getName(), userInTask)){
-                                    Task task = model.getFindTask(newTask.getName(), userInTask);
-                                    Timer timer = new Timer();
-                                    oos.writeObject(ServerAnswer.success("Задача активированна!"));
-                                    oos.reset();
-                                    ClientCommand end = (ClientCommand) ois.readObject();
-                                    if (end.getAction() == ClientCommand.Action.STOP){
-                                        timer.setEndDate();
-                                        timer.setLongDate();
-                                        task.setOneHistory(user,timer);
-                                        oos.writeObject(ServerAnswer.success("Задача остановлена!"));
-                                        oos.reset();
-                                    } else {
-                                        oos.writeObject(ServerAnswer.failure("Неизвестная задача!"));
-                                        oos.reset();
-                                    }
-                                } else {
-                                    oos.writeObject(ServerAnswer.failure("Задача не найдена!"));
                                     oos.reset();
                                 }
                                 break;
