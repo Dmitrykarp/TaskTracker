@@ -188,6 +188,8 @@ public class MultiServer extends Thread {
                                 newTask = (Task) command.getObject();
                                 if(model.findTask(newTask.getName(), userInTask)){
                                     Task task = model.getFindTask(newTask.getName(), userInTask);
+                                    task.updateAllTime(user);
+                                    task.upd(user);
                                     oos.writeObject(ServerAnswer.success(task));
                                     oos.reset();
                                 } else {

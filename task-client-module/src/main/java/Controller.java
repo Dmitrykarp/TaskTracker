@@ -290,6 +290,7 @@ public class Controller {
                     Task taskStat = (Task) answer.getObject();
 
                     thisView.printStat(thisUser,taskStat);
+                    thisView.printAllStat(taskStat);
 
                 }else if("8".equals(command.trim().toLowerCase())){
                     exit=true;

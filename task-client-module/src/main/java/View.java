@@ -103,9 +103,35 @@ public class View {
                System.out.println("=======================================================");
            }
        }
+    }
 
+    public void printAllStat(Task taskStat){
+        if (taskStat == null){
+            System.out.println("Задача не найдена.");
+        }else {
+                System.out.println("==========================================");
+                System.out.printf("| %15s | %20s | \n","NAME","TIMER");
+                printChildrenTime(taskStat);
+            System.out.println("==========================================");
+        }
+    }
 
+    private void printChildrenTime(Task task){
+        long[] time = new long[4];
+        time[0] = task.getAllTime() / 86400000; //Days
+        time[1] = (task.getAllTime() / 3600000) - time[0]*24 ; //Hours
+        time[2] = task.getAllTime() / 60000 - time[1]*60; //Minutes
+        time[3] = task.getAllTime() / 1000  - time[2]*60;
+        String timer = time[0] +"д. " +time[1] +"ч. " +time[2] +"м. " + time[3] +"c.";
+        if (task.getTasks().size() == 0) {
 
+            System.out.printf("| %15s | %20s |  \n",task.getName(),timer);
+        }else{
+            System.out.printf("| %15s | %20s | \n",task.getName(), timer);
+            for (Task t: task.getTasks()){
+                printChildrenTime(t);
+            }
+        }
     }
 
 }

@@ -47,24 +47,28 @@ public class Task implements Serializable {
     }
 
     public void updateAllTime(User user){
-
+        allTime=0;
         if(history.containsKey(user)){
             ArrayList<Timer> list = history.get(user);
+
             for (Timer t: list){
                 allTime+=t.getLongDate();
             }
-            if(tasks != null){
+            if(tasks.size() != 0){
                 for(Task task: tasks){
                     task.updateAllTime(user);
                 }
             }
-            allTime+=updParent(user);
         }
+    }
+
+    public void upd(User user){
+        allTime+=updParent(user);
     }
 
     private long updParent(User user){
         if(history.containsKey(user)){
-            if(this.tasks == null){
+            if(this.tasks.size() == 0){
                 return allTime;
             } else{
                 for (Task task: this.tasks){
@@ -75,6 +79,10 @@ public class Task implements Serializable {
         }else {
             return 0;
         }
+    }
+
+    public long getAllTime() {
+        return allTime;
     }
 
     public void setHistory(HashMap<User, ArrayList<Timer>> history) {
