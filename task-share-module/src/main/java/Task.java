@@ -8,19 +8,17 @@ public class Task implements Serializable {
     private static final long serialVersionUID = 8887001020159611234L;
     private String name;
     private int id;
-    private Calendar calendar;
+    private long allTime=0;
     private ArrayList<Task> tasks= new ArrayList<Task>();
     private HashMap<User, ArrayList<Timer>> history = new HashMap<User,ArrayList<Timer>>();
 
     public Task(String name, int id) {
         this.name = name;
         this.id = id;
-        this.calendar = Calendar.getInstance();
     }
 
     public Task(String name){
         this.name=name;
-        this.calendar = Calendar.getInstance();
     }
 
     public String getName() {
@@ -48,16 +46,34 @@ public class Task implements Serializable {
 
     }
 
-    public void updateParentTimer(User user){
-        if(tasks == null){
-            if (history.containsKey(user)){
-                ArrayList<Timer> tempList = history.get(user);
-                for (Timer t : tempList){
-                    //TODO ИСПРАВИТЬ
+    public void updateAllTime(User user){
+
+        if(history.containsKey(user)){
+            ArrayList<Timer> list = history.get(user);
+            for (Timer t: list){
+                allTime+=t.getLongDate();
+            }
+            if(tasks != null){
+                for(Task task: tasks){
+                    task.updateAllTime(user);
                 }
             }
-        }else {
+            allTime+=updParent(user);
+        }
+    }
 
+    private long updParent(User user){
+        if(history.containsKey(user)){
+            if(this.tasks == null){
+                return allTime;
+            } else{
+                for (Task task: this.tasks){
+                    allTime+=task.updParent(user);
+                }
+                return allTime;
+            }
+        }else {
+            return 0;
         }
     }
 
@@ -79,10 +95,6 @@ public class Task implements Serializable {
 
     public ArrayList<Task> getTasks() {
         return tasks;
-    }
-
-    public Calendar getCalendar() {
-        return calendar;
     }
 
     public Task getTask(int id){
