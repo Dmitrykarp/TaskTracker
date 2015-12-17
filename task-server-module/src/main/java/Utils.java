@@ -39,7 +39,6 @@ public class Utils {
             ObjectInputStream oin = new ObjectInputStream(fis);
             ts = (Model) oin.readObject();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             Task noWork = new Task("Не работа", 0);
             ts.addTask(noWork);
             }
