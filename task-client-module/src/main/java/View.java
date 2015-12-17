@@ -2,7 +2,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
- * Created by Support on 06.12.2015.
+ * Класс <code>View</code> оповещает пользователя о последствиях ввода его команд.
+ *
+ * @author Karpenko Dmitry
  */
 public class View {
     SimpleDateFormat format = new SimpleDateFormat("YYYY.MM.dd");
@@ -10,7 +12,9 @@ public class View {
 
     }
 
-
+    /**
+     * Перечисление всех команд, для вывода на консоль.
+     */
     enum Help{
         CONSOLE,
         USERCREATE,
@@ -26,6 +30,11 @@ public class View {
 
     }
 
+    /**
+     * Метод выводит на консоль оповещения для пользователя.
+     *
+     * @param enume Перечисление из enum Help.
+     */
     public void printConsole(Help enume){
         switch (enume){
             case CONSOLE:
@@ -71,11 +80,16 @@ public class View {
             case DISCONNECT:
                 System.out.println("Сервер разорвал соединение.");
             default:
-                System.out.println("Введите команду [help] для справки.");
+                break;
 
         }
     }
 
+    /**
+     * Метод выводит на консоль список всех задач.
+     *
+     * @param tasks Корневая задача.
+     */
     public void printTask(ArrayList<Task> tasks) {
         System.out.println("===============");
         for (Task task: tasks){
@@ -84,11 +98,17 @@ public class View {
         System.out.println("===============");
     }
 
-    public void printStat(User u,Task taskStat) {
+    /**
+     * Метод выводит таблицу статистики по датам для одной, текущей задачи.
+     *
+     * @param user Пользователь, для которого выводится информация.
+     * @param taskStat Задача, для вывода статистики.
+     */
+    public void printStat(User user,Task taskStat) {
        if (taskStat == null){
            System.out.println("Задача не найдена.");
        }else {
-           ArrayList<Timer> temp = taskStat.getHistory().get(u);
+           ArrayList<Timer> temp = taskStat.getHistory().get(user);
            if (temp == null){
                System.out.println("Нет данных для вывода.");
            }else {
@@ -111,6 +131,13 @@ public class View {
        }
     }
 
+    /**
+     * Метод выводит на консоль корневую задачу и все ее подзадачи
+     * в виде таблицы с именем и общим временем за все время
+     * существования родительской задачи и ее подзадач.
+     *
+     * @param taskStat Родительская задача.
+     */
     public void printAllStat(Task taskStat){
         if (taskStat == null){
             System.out.println("Задача не найдена.");
@@ -122,6 +149,11 @@ public class View {
         }
     }
 
+    /**
+     * Метод использует рекурсию, для вывода всех подзадач.
+     *
+     * @param task Родительская задача.
+     */
     private void printChildrenTime(Task task){
         long[] time = new long[4];
         time[0] = task.getAllTime() / 86400000; //Days

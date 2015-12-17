@@ -2,22 +2,44 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
+/**
+ * Класс, работающий с подключенными клиентами. Позволяет обрабатывать команды от клиента
+ * в отдельном потоке.
+ *
+ * @author Karpenko Dmitry
+ */
 public class MultiServer extends Thread {
     private Socket socket;
+    // Флаг пользователя
     private User user;
     private Model model;
-    private Task taskUP = new Task("PARENT",-1);  //Флаг корня
+    // Флаг корневой задачи
+    private Task taskUP = new Task("PARENT",-1);
+    // Флаг задачи, в которой находится пользователь в данный момент времени.
     private Task userInTask;
+    // Таймер, для отчета времени между переключениями задач.
     private Timer tikTak;
 
-
-    public MultiServer(Socket s, Model m) throws IOException{
-        socket = s;
-        model = m;
+    /**
+     * Конструктору необходимо явно указать сокет и модель для дальнейшей работы.
+     *
+     * @param socket Ссылка на сокет.
+     * @param model  Ссылка на модель.
+     *
+     * @throws IOException Возникает при ошибках Ввода\Вывода.
+     */
+    public MultiServer(Socket socket, Model model) throws IOException{
+        this.socket = socket;
+        this.model = model;
 
         start();
     }
 
+    /**
+     * Метод реализует основную логику работы многопоточного сервера.
+     * Принимает команды от клиента, обрабатывает модель и
+     * отправляет ответ на клиент.
+     */
     public void run() {
         ObjectInputStream ois = null;
         ObjectOutputStream oos = null;
@@ -34,6 +56,7 @@ public class MultiServer extends Thread {
                     if (readed instanceof ClientCommand) {
                         ClientCommand command = (ClientCommand) readed;
                         switch (command.getAction()) {
+                            //Вход пользователя
                             case SIGNIN:
                                 user = (User) command.getObject();
                                 if (model.findEqualsUser(user)) {
@@ -45,7 +68,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
-
+                            // Создание нового пользователя
                             case SIGNUP:
                                 User tempUser = (User) command.getObject();
                                 if (model.findEqualsUser(tempUser)) {
@@ -59,7 +82,7 @@ public class MultiServer extends Thread {
                                     userInTask = taskUP;
                                 }
                                 break;
-
+                            // Получение списка задач
                             case GETTASKS:
                                 if (userInTask.equals(taskUP)) {
                                     oos.writeObject(ServerAnswer.success(model.getTasks()));
@@ -69,7 +92,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
-
+                            // Создание задачи
                             case CREATETASK:
                                 Task newTask = (Task) command.getObject();
                                 if(model.findTask(newTask.getName(), userInTask)){
@@ -85,10 +108,9 @@ public class MultiServer extends Thread {
                                     }
                                     oos.writeObject(ServerAnswer.success("Задача успешно создана!"));
                                     oos.reset();
-
                                 }
                                 break;
-
+                            // Выбор родительской задачи
                             case SELECTTASK:
                                 newTask = (Task) command.getObject();
                                 if (userInTask.equals(taskUP)){
@@ -120,7 +142,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
-
+                            // Переименование задачи.
                             case RENAMETASK:
                                 String oldName = command.getOldName();
                                 String newName = command.getNewName();
@@ -139,7 +161,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
-
+                            // Удаление задачи и всех ее подзадач.
                             case DELETETASK:
                                 Task t = (Task) command.getObject();
                                 if (model.findTask(t.getName(), userInTask)){
@@ -162,7 +184,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
-
+                            // Получение статистики
                             case TASKSTAT:
                                 newTask = (Task) command.getObject();
                                 if(model.findTask(newTask.getName(), userInTask)){

@@ -2,6 +2,11 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * Точка входа на стороне сервера.
+ *
+ * @author Karpenko Dmitry
+ */
 public class ServerMain {
     static final int PORT=37777;
 

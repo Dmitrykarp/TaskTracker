@@ -2,6 +2,11 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 
+/**
+ * Точка входа в клиентской части.
+ *
+ * @author Karpenko Dmitry
+ */
 public class ClientMain {
     static final int PORT = 37777;
     public static void main(String[] args) throws IOException {

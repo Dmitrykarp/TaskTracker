@@ -2,6 +2,13 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
+/**
+ * Класс <code>Controller</code> взаимодействует с классами <code>ClientCommand</code> и
+ * <code>View</code>.
+ * Класс обрабатывает все комманды пользователя и манипулирует данными.
+ *
+ * @author Karpenko Dmitry
+ */
 public class Controller {
     private Socket socket;
     private View thisView = new View();
@@ -9,11 +16,20 @@ public class Controller {
     ObjectInputStream ois = null;
     ObjectOutputStream oos = null;
 
-
+    /**
+     * Конструктору необходимо явно указать сокет для связи с сервером.
+     *
+     * @param socket Сокет на стороне клиента
+     */
     public Controller(Socket socket) {
         this.socket=socket;
     }
 
+    /**
+     * Метод считывает данные, введенные в консоли и манипулирует ими.
+     *
+     * @throws IOException Возникает при ошибке ввода\вывода.
+     */
     public void run() throws IOException {
         try {
             oos = new ObjectOutputStream(socket.getOutputStream());
@@ -95,16 +111,16 @@ public class Controller {
                     exit=true;
                 } else thisView.printConsole(View.Help.ERROR);
             }
-
+            // Проверка на выход из аутентификации
             if (!subExit) {
                 exit = false;
             }
-
-
+            // Основная работа программы после аутентификации пользователя
             while (!exit){
                 thisView.printConsole(View.Help.WORKMENU);
                 thisView.printConsole(View.Help.CONSOLE);
                 command = readerConsole.readLine();
+                // Получение списка всех дочерних задач
                 if("1".equals(command.trim().toLowerCase())){
                     ClientCommand clientCommand = new ClientCommand(ClientCommand.Action.GETTASKS);
                     oos.writeObject(clientCommand);
@@ -117,7 +133,7 @@ public class Controller {
                     }
                     ArrayList<Task> tasks =(ArrayList<Task>) answer.getObject();
                     thisView.printTask(tasks);
-
+                // Выбор родительской задачи
                 }else if("2".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
                     thisView.printConsole(View.Help.GOTOUP);
@@ -143,7 +159,7 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
+                // Создание новой задачи
                 }else if("3".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
                     thisView.printConsole(View.Help.CONSOLE);
@@ -168,7 +184,7 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
+                // Переименование существующей задачи
                 }else if("4".equals(command.trim().toLowerCase())){
                     String oldName, newName;
                     thisView.printConsole(View.Help.TASKCREATE);
@@ -196,7 +212,7 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
+                // Удаление задачи и всех ее подзадач
                 }else if("5".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
                     thisView.printConsole(View.Help.CONSOLE);
@@ -221,7 +237,7 @@ public class Controller {
                         default:
                             thisView.printConsole(View.Help.ERROR);
                     }
-
+                // Вывод статистики
                 }else  if("6".equals(command.trim().toLowerCase())){
                     thisView.printConsole(View.Help.TASKCREATE);
                     thisView.printConsole(View.Help.CONSOLE);
@@ -236,12 +252,10 @@ public class Controller {
                     } catch (ClassNotFoundException e) {
                         e.printStackTrace();
                     }
-
                     Task taskStat = (Task) answer.getObject();
-
                     thisView.printStat(thisUser,taskStat);
                     thisView.printAllStat(taskStat);
-
+                // Выход
                 }else if("7".equals(command.trim().toLowerCase())){
                     exit=true;
                 }else thisView.printConsole(View.Help.ERROR);

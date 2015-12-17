@@ -26,40 +26,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/Controller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6640625">
-              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ServerMain.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/ServerMain.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="Task.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/Task.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+              <caret line="106" column="43" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
               <folding>
                 <element signature="method#Task#0;class#Task#0" expanded="false" />
                 <element signature="method#setOneHistory#0;class#Task#0" expanded="false" />
                 <element signature="method#updateAllTime#0;class#Task#0" expanded="false" />
                 <element signature="method#updParent#0;class#Task#0" expanded="false" />
-                <element signature="method#getTask#0;class#Task#0" expanded="false" />
-                <element signature="e#3198#3199#0" expanded="true" />
                 <element signature="method#equals#0;class#Task#0" expanded="false" />
                 <element signature="method#hashCode#0;class#Task#0" expanded="false" />
               </folding>
@@ -67,64 +43,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClientCommand.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/ClientCommand.java">
+      <file leaf-file-name="Timer.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/Timer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="82" selection-start-line="7" selection-start-column="82" selection-end-line="7" selection-end-column="82" />
+            <state vertical-scroll-proportion="0.05691964">
+              <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
               <folding>
-                <element signature="method#ClientCommand#0;class#ClientCommand#0" expanded="false" />
-                <element signature="method#ClientCommand#2;class#ClientCommand#0" expanded="false" />
+                <element signature="method#oneDay#0;class#Timer#0" expanded="false" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Utils.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/Utils.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Model.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/Model.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#144#150#0" expanded="true" />
-                <element signature="e#195#201#0" expanded="true" />
-                <element signature="method#getUser#0;class#Model#0" expanded="false" />
-                <element signature="method#findEqualsUser#0;class#Model#0" expanded="false" />
-                <element signature="method#findMaxId#0;class#Model#0" expanded="false" />
-                <element signature="method#findTask#0;class#Model#0" expanded="false" />
-                <element signature="method#getFindTask#0;class#Model#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MultiServer.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/MultiServer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="156" column="52" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="52" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="View.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/View.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="68" column="114" selection-start-line="68" selection-start-column="114" selection-end-line="68" selection-end-column="114" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -156,19 +82,19 @@
         <option value="$PROJECT_DIR$/task-share-module/src/main/java/Command.java" />
         <option value="$PROJECT_DIR$/task-client-module/src/main/java/MainApp.java" />
         <option value="$PROJECT_DIR$/task-server-module/src/main/java/MainApp.java" />
-        <option value="$PROJECT_DIR$/task-share-module/src/main/java/Task.java" />
-        <option value="$PROJECT_DIR$/task-client-module/src/main/java/ClientMain.java" />
         <option value="$PROJECT_DIR$/task-share-module/src/main/java/Model.java" />
-        <option value="$PROJECT_DIR$/task-share-module/src/main/java/ServerAnswer.java" />
-        <option value="$PROJECT_DIR$/task-share-module/src/main/java/Timer.java" />
-        <option value="$PROJECT_DIR$/task-share-module/src/main/java/User.java" />
+        <option value="$PROJECT_DIR$/task-client-module/src/main/java/ClientMain.java" />
+        <option value="$PROJECT_DIR$/task-client-module/src/main/java/Controller.java" />
+        <option value="$PROJECT_DIR$/task-client-module/src/main/java/View.java" />
+        <option value="$PROJECT_DIR$/task-share-module/src/main/java/Task.java" />
         <option value="$PROJECT_DIR$/task-server-module/src/main/java/ServerMain.java" />
         <option value="$PROJECT_DIR$/task-server-module/src/main/java/Utils.java" />
         <option value="$PROJECT_DIR$/task-server-module/src/main/java/Model.java" />
-        <option value="$PROJECT_DIR$/task-share-module/src/main/java/ClientCommand.java" />
-        <option value="$PROJECT_DIR$/task-client-module/src/main/java/View.java" />
         <option value="$PROJECT_DIR$/task-server-module/src/main/java/MultiServer.java" />
-        <option value="$PROJECT_DIR$/task-client-module/src/main/java/Controller.java" />
+        <option value="$PROJECT_DIR$/task-share-module/src/main/java/ClientCommand.java" />
+        <option value="$PROJECT_DIR$/task-share-module/src/main/java/ServerAnswer.java" />
+        <option value="$PROJECT_DIR$/task-share-module/src/main/java/User.java" />
+        <option value="$PROJECT_DIR$/task-share-module/src/main/java/Timer.java" />
       </list>
     </option>
   </component>
@@ -609,7 +535,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="C:/InfoSystem-master" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="project.structure.last.edited" value="Problems" />
@@ -956,8 +882,6 @@
             <element signature="method#setOneHistory#0;class#Task#0" expanded="false" />
             <element signature="method#updateAllTime#0;class#Task#0" expanded="false" />
             <element signature="method#updParent#0;class#Task#0" expanded="false" />
-            <element signature="method#getTask#0;class#Task#0" expanded="false" />
-            <element signature="e#3198#3199#0" expanded="true" />
             <element signature="method#equals#0;class#Task#0" expanded="false" />
             <element signature="method#hashCode#0;class#Task#0" expanded="false" />
           </folding>
@@ -1026,8 +950,6 @@
             <element signature="method#setOneHistory#0;class#Task#0" expanded="false" />
             <element signature="method#updateAllTime#0;class#Task#0" expanded="false" />
             <element signature="method#updParent#0;class#Task#0" expanded="false" />
-            <element signature="method#getTask#0;class#Task#0" expanded="false" />
-            <element signature="e#3198#3199#0" expanded="true" />
             <element signature="method#equals#0;class#Task#0" expanded="false" />
             <element signature="method#hashCode#0;class#Task#0" expanded="false" />
           </folding>
@@ -1271,67 +1193,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/ClientMain.java">
+    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/View.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.018973215">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4877232">
+          <caret line="154" column="39" selection-start-line="154" selection-start-column="39" selection-end-line="154" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/Timer.java">
+    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/ClientMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="48" selection-start-line="33" selection-start-column="48" selection-end-line="33" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.094866075">
+          <caret line="7" column="26" selection-start-line="7" selection-start-column="26" selection-end-line="7" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.751116">
+          <caret line="257" column="24" selection-start-line="257" selection-start-column="24" selection-end-line="257" selection-end-column="24" />
           <folding>
-            <element signature="method#oneDay#0;class#Timer#0" expanded="false" />
+            <element signature="e#660#661#0" expanded="true" />
+            <element signature="e#694#695#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/User.java">
+    <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/MultiServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.058925476">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding>
-            <element signature="method#setId#0;class#User#0" expanded="false" />
-            <element signature="method#equals#0;class#User#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/ServerAnswer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.73656845">
-          <caret line="42" column="48" selection-start-line="42" selection-start-column="48" selection-end-line="42" selection-end-column="48" />
-          <folding>
-            <element signature="class#Type#0;class#ServerAnswer#0" expanded="false" />
-            <element signature="method#ServerAnswer#0;class#ServerAnswer#0" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.14620535">
+          <caret line="186" column="51" selection-start-line="186" selection-start-column="51" selection-end-line="186" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/Utils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="13" selection-start-line="23" selection-start-column="13" selection-end-line="23" selection-end-column="13" />
+        <state vertical-scroll-proportion="0.5691964">
+          <caret line="30" column="62" selection-start-line="30" selection-start-column="62" selection-end-line="30" selection-end-column="62" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/ServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3794643">
+          <caret line="20" column="4" selection-start-line="20" selection-start-column="4" selection-end-line="20" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/Model.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="3.5424106">
+          <caret line="187" column="47" selection-start-line="187" selection-start-column="47" selection-end-line="187" selection-end-column="47" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#144#150#0" expanded="true" />
-            <element signature="e#195#201#0" expanded="true" />
-            <element signature="method#getUser#0;class#Model#0" expanded="false" />
-            <element signature="method#findEqualsUser#0;class#Model#0" expanded="false" />
-            <element signature="method#findMaxId#0;class#Model#0" expanded="false" />
-            <element signature="method#findTask#0;class#Model#0" expanded="false" />
-            <element signature="method#getFindTask#0;class#Model#0" expanded="false" />
+            <element signature="e#284#290#0" expanded="true" />
+            <element signature="e#335#341#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#543#544#0" expanded="true" />
+            <element signature="e#710#711#0" expanded="true" />
+            <element signature="e#741#742#0" expanded="true" />
+            <element signature="e#1897#1898#0" expanded="true" />
+            <element signature="e#1925#1926#0" expanded="true" />
+            <element signature="e#4303#4304#0" expanded="true" />
+            <element signature="e#4337#4338#0" expanded="true" />
+            <element signature="e#4520#4521#0" expanded="true" />
+            <element signature="e#4554#4555#0" expanded="true" />
+            <element signature="e#4734#4735#0" expanded="true" />
+            <element signature="e#4762#4763#0" expanded="true" />
+            <element signature="e#4961#4962#0" expanded="true" />
+            <element signature="e#4995#4996#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1339,62 +1275,69 @@
     <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/ClientCommand.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="82" selection-start-line="7" selection-start-column="82" selection-end-line="7" selection-end-column="82" />
+          <caret line="83" column="19" selection-start-line="83" selection-start-column="19" selection-end-line="83" selection-end-column="19" />
           <folding>
-            <element signature="method#ClientCommand#0;class#ClientCommand#0" expanded="false" />
             <element signature="method#ClientCommand#2;class#ClientCommand#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/ServerMain.java">
+    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/ServerAnswer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
+          <caret line="104" column="45" selection-start-line="104" selection-start-column="45" selection-end-line="104" selection-end-column="45" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="class#Type#0;class#ServerAnswer#0" expanded="false" />
+            <element signature="method#ServerAnswer#0;class#ServerAnswer#0" expanded="false" />
+            <element signature="e#1136#1137#0" expanded="true" />
+            <element signature="e#1198#1199#0" expanded="true" />
+            <element signature="e#1705#1706#0" expanded="true" />
+            <element signature="e#1767#1768#0" expanded="true" />
+            <element signature="e#2037#2038#0" expanded="true" />
+            <element signature="e#2101#2102#0" expanded="true" />
+            <element signature="e#2233#2234#0" expanded="true" />
+            <element signature="e#2260#2261#0" expanded="true" />
+            <element signature="e#2384#2385#0" expanded="true" />
+            <element signature="e#2414#2415#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/View.java">
+    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="114" selection-start-line="68" selection-start-column="114" selection-end-line="68" selection-end-column="114" />
-          <folding />
+        <state vertical-scroll-proportion="0.81584823">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding>
+            <element signature="e#550#551#0" expanded="true" />
+            <element signature="e#575#576#0" expanded="true" />
+            <element signature="e#1101#1102#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/Task.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="0" selection-start-line="128" selection-start-column="0" selection-end-line="128" selection-end-column="0" />
+          <caret line="106" column="43" selection-start-line="106" selection-start-column="43" selection-end-line="106" selection-end-column="43" />
           <folding>
             <element signature="method#Task#0;class#Task#0" expanded="false" />
             <element signature="method#setOneHistory#0;class#Task#0" expanded="false" />
             <element signature="method#updateAllTime#0;class#Task#0" expanded="false" />
             <element signature="method#updParent#0;class#Task#0" expanded="false" />
-            <element signature="method#getTask#0;class#Task#0" expanded="false" />
-            <element signature="e#3198#3199#0" expanded="true" />
             <element signature="method#equals#0;class#Task#0" expanded="false" />
             <element signature="method#hashCode#0;class#Task#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/task-server-module/src/main/java/MultiServer.java">
+    <entry file="file://$PROJECT_DIR$/task-share-module/src/main/java/Timer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="156" column="52" selection-start-line="156" selection-start-column="52" selection-end-line="156" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/task-client-module/src/main/java/Controller.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6640625">
-          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
-          <folding />
+        <state vertical-scroll-proportion="0.05691964">
+          <caret line="4" column="3" selection-start-line="4" selection-start-column="3" selection-end-line="4" selection-end-column="3" />
+          <folding>
+            <element signature="method#oneDay#0;class#Timer#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
