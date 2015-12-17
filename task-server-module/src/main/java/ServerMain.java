@@ -2,9 +2,6 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-/**
- * Created by Support on 06.12.2015.
- */
 public class ServerMain {
     static final int PORT=37777;
 

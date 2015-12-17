@@ -1,21 +1,17 @@
 import java.util.ArrayList;
 
-/**
- * Created by Support on 06.12.2015.
- */
 public class Model {
     ArrayList<Task> tasks = new ArrayList<Task>();
     ArrayList<User> users = new ArrayList<User>();
 
     Model(){
-
     }
 
-    public void addTask(Task task){
+    public synchronized void addTask(Task task){
         tasks.add(task);
     }
 
-    public void addUser(User user){
+    public synchronized void addUser(User user){
         users.add(user);
     }
 
@@ -31,7 +27,7 @@ public class Model {
         } else return tempUser;
     }
 
-    public boolean findEqualsUser(User u){
+    public synchronized boolean findEqualsUser(User u){
         for(User user: users){
             if(user.equals(u)){
                 return true;
@@ -40,11 +36,11 @@ public class Model {
         return false;
     }
 
-    public ArrayList<Task> getTasks() {
+    public synchronized ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public int findMaxId(ArrayList<Task> tasks1){
+    public synchronized int findMaxId(ArrayList<Task> tasks1){
         int temp=0;
         for(Task task: tasks1){
             if(task.getTasks().isEmpty()){
@@ -58,7 +54,7 @@ public class Model {
         return temp;
     }
 
-    public boolean findTask(String name, Task tempTask){
+    public synchronized boolean findTask(String name, Task tempTask){
         boolean b = false;
         if (tempTask.equals(new Task("PARENT",-1))){
             for (Task task: tasks){
@@ -78,7 +74,7 @@ public class Model {
         return b;
     }
 
-    public Task getFindTask (String name,Task tempTask){
+    public synchronized Task getFindTask (String name,Task tempTask){
         Task temp=null;
         if (tempTask.equals(new Task("PARENT",-1))){
             for (Task task: tasks){
@@ -98,19 +94,19 @@ public class Model {
         return temp;
     }
 
-    public void dellTask(Task task){
+    public synchronized void dellTask(Task task){
         tasks.remove(task);
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
+    public synchronized void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public ArrayList<User> getUsers() {
+    public synchronized ArrayList<User> getUsers() {
         return users;
     }
 
-    public void setUsers(ArrayList<User> users) {
+    public synchronized void setUsers(ArrayList<User> users) {
         this.users = users;
     }
 

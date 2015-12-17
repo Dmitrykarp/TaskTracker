@@ -21,6 +21,7 @@ public class View {
         TASKRENAME,
         GOTOUP,
         TASKACTION,
+        DISCONNECT
 
     }
 
@@ -63,7 +64,9 @@ public class View {
                 break;
             case ERROR:
                 System.out.println("Ошибка!");
-
+                break;
+            case DISCONNECT:
+                System.out.println("Сервер разорвал соединение.");
             default:
                 System.out.println("Введите команду [help] для справки.");
 

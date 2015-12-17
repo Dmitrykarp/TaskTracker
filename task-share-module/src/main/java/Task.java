@@ -1,6 +1,5 @@
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 
@@ -21,15 +20,15 @@ public class Task implements Serializable {
         this.name=name;
     }
 
-    public String getName() {
+    public synchronized String getName() {
         return name;
     }
 
-    public HashMap<User, ArrayList<Timer>> getHistory() {
+    public synchronized HashMap<User, ArrayList<Timer>> getHistory() {
         return history;
     }
 
-    public void setOneHistory(User u, Timer t){
+    public synchronized void setOneHistory(User u, Timer t){
         if(history.containsKey(u)) {
             ArrayList<Timer> list = history.get(u);
             Timer tempTimer = list.get(list.size()-1);
@@ -46,7 +45,7 @@ public class Task implements Serializable {
 
     }
 
-    public void updateAllTime(User user){
+    public synchronized void updateAllTime(User user){
         allTime=0;
         if(history.containsKey(user)){
             ArrayList<Timer> list = history.get(user);
@@ -62,7 +61,7 @@ public class Task implements Serializable {
         }
     }
 
-    public void upd(User user){
+    public synchronized void updateParentAllTime(User user){
         allTime+=updParent(user);
     }
 
@@ -81,15 +80,15 @@ public class Task implements Serializable {
         }
     }
 
-    public long getAllTime() {
+    public synchronized long getAllTime() {
         return allTime;
     }
 
-    public void setHistory(HashMap<User, ArrayList<Timer>> history) {
+    public synchronized void setHistory(HashMap<User, ArrayList<Timer>> history) {
         this.history = history;
     }
 
-    public void setName(String name) {
+    public synchronized void setName(String name) {
         this.name = name;
     }
 
@@ -97,15 +96,15 @@ public class Task implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
+    public synchronized void setId(int id) {
         this.id = id;
     }
 
-    public ArrayList<Task> getTasks() {
+    public synchronized ArrayList<Task> getTasks() {
         return tasks;
     }
 
-    public Task getTask(int id){
+    public synchronized Task getTask(int id){
         Task tempTask=null;
         for(Task t: tasks){
             if(t.getId() == id){
@@ -117,20 +116,20 @@ public class Task implements Serializable {
         }else return tempTask;
     }
 
-    public void setTasks(ArrayList<Task> tasks) {
+    public synchronized void setTasks(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    public void addTask (Task task){
+    public synchronized void addTask (Task task){
         tasks.add(task);
     }
 
-    public void dellTask(Task task) {
+    public synchronized void dellTask(Task task) {
         tasks.remove(task);
     }
 
     @Override
-    public boolean equals(Object o) {
+    public synchronized boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 

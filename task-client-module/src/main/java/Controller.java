@@ -2,9 +2,6 @@ import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 
-/**
- * Created by Support on 06.12.2015.
- */
 public class Controller {
     private Socket socket;
     private View thisView = new View();
@@ -298,9 +295,9 @@ public class Controller {
 
             }
         }catch (IOException e) {
-            System.out.println("Ошибка");
+            thisView.printConsole(View.Help.DISCONNECT);
         } finally {
-            //Закрываем потоки
+            socket.close();
         }
 
     }

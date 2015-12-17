@@ -11,28 +11,27 @@ public class Timer implements Serializable {
         this.startDate = Calendar.getInstance();
     }
 
-    public void setEndDate() {
+    public synchronized void setEndDate() {
         this.endDate = Calendar.getInstance();
     }
 
-    public void setLongDate(){
+    public synchronized void setLongDate(){
         longDate = endDate.getTime().getTime() - startDate.getTime().getTime();
     }
 
-    public void setLongDate(Timer t){
+    public synchronized void setLongDate(Timer t){
         longDate+=t.getLongDate();
     }
 
-    public Calendar getStartDate() {
+    public synchronized Calendar getStartDate() {
         return startDate;
     }
 
-    //TODO Перенести к клиенту, а тут возвращать просто LONG!
-    public long getLongDate() {
+    public synchronized long getLongDate() {
         return longDate;
     }
 
-    public boolean oneDay (Timer t){
+    public synchronized boolean oneDay (Timer t){
         if(this.startDate.getTime().getYear() == t.startDate.getTime().getYear()){
             if(this.startDate.getTime().getMonth() == t.startDate.getTime().getMonth()){
                 if(this.startDate.getTime().getDay() == t.startDate.getTime().getDay()){
@@ -40,7 +39,6 @@ public class Timer implements Serializable {
                 }
             }
         }
-
         return false;
     }
 }

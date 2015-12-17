@@ -2,9 +2,6 @@ import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 
-/**
- * Created by Support on 06.12.2015.
- */
 public class MultiServer extends Thread {
     private Socket socket;
     private User user;
@@ -91,6 +88,7 @@ public class MultiServer extends Thread {
 
                                 }
                                 break;
+
                             case SELECTTASK:
                                 newTask = (Task) command.getObject();
                                 if (userInTask.equals(taskUP)){
@@ -122,6 +120,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
+
                             case RENAMETASK:
                                 String oldName = command.getOldName();
                                 String newName = command.getNewName();
@@ -140,6 +139,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
+
                             case DELETETASK:
                                 Task t = (Task) command.getObject();
                                 if (model.findTask(t.getName(), userInTask)){
@@ -160,6 +160,7 @@ public class MultiServer extends Thread {
                                     oos.reset();
                                 }
                                 break;
+
                             case TASKACTION:
                                 newTask = (Task) command.getObject();
                                 if(model.findTask(newTask.getName(), userInTask)){
@@ -178,18 +179,18 @@ public class MultiServer extends Thread {
                                         oos.writeObject(ServerAnswer.failure("Неизвестная задача!"));
                                         oos.reset();
                                     }
-
                                 } else {
                                     oos.writeObject(ServerAnswer.failure("Задача не найдена!"));
                                     oos.reset();
                                 }
                                 break;
+
                             case TASKSTAT:
                                 newTask = (Task) command.getObject();
                                 if(model.findTask(newTask.getName(), userInTask)){
                                     Task task = model.getFindTask(newTask.getName(), userInTask);
                                     task.updateAllTime(user);
-                                    task.upd(user);
+                                    task.updateParentAllTime(user);
                                     oos.writeObject(ServerAnswer.success(task));
                                     oos.reset();
                                 } else {
@@ -204,8 +205,6 @@ public class MultiServer extends Thread {
                 } catch (EOFException e){
                     throw new SocketException();
                 }
-
-
             }
 
         }catch (SocketException e) {
@@ -221,9 +220,5 @@ public class MultiServer extends Thread {
                 System.out.println("Socket not closed");
             }
         }
-
-
-
-
     }
 }

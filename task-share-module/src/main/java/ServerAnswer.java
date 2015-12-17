@@ -41,7 +41,4 @@ public class ServerAnswer implements Serializable {
         return message;
     }
     public Object getObject() { return  object;}
-
-
-
 }
