@@ -33,13 +33,32 @@ public class Task implements Serializable {
 
     public void setOneHistory(User u, Timer t){
         if(history.containsKey(u)) {
-            history.get(u).add(t);
+            ArrayList<Timer> list = history.get(u);
+            Timer tempTimer = list.get(list.size()-1);
+            if(tempTimer.oneDay(t)){
+                tempTimer.setLongDate(t);
+            }else{
+                history.get(u).add(t);
+            }
         } else{
             ArrayList<Timer> list = new ArrayList<Timer>();
             list.add(t);
             history.put(u, list);
         }
 
+    }
+
+    public void updateParentTimer(User user){
+        if(tasks == null){
+            if (history.containsKey(user)){
+                ArrayList<Timer> tempList = history.get(user);
+                for (Timer t : tempList){
+                    //TODO ИСПРАВИТЬ
+                }
+            }
+        }else {
+
+        }
     }
 
     public void setHistory(HashMap<User, ArrayList<Timer>> history) {

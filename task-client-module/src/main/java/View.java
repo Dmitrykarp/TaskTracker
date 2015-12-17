@@ -90,10 +90,15 @@ public class View {
                System.out.printf("| %15s | %15s | %15s | \n","NAME","DATE","TIMER");
 
                for (Timer t: temp){
+                   long[] time = new long[3];
+                   time[0] = t.getLongDate() / 86400000; //Days
+                   time[1] = (t.getLongDate() / 3600000) - time[0]*24 ; //Hours
+                   time[2] = t.getLongDate() / 60000 - time[1]*60; //Minutes
+                   String timer = time[0] +"д. " +time[1] +"ч. " +time[2] +"м.";
                    System.out.printf("| %15s | %15s | %15s | \n"
                            ,taskStat.getName()
-                           ,format.format(taskStat.getCalendar().getTime())
-                           ,t.getLongDate());
+                           ,format.format(t.getStartDate().getTime())
+                           ,timer);
                }
                System.out.println("=======================================================");
            }

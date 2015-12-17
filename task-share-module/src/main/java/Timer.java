@@ -19,13 +19,28 @@ public class Timer implements Serializable {
         longDate = endDate.getTime().getTime() - startDate.getTime().getTime();
     }
 
-    //TODO Перенести к клиенту, а тут возвращать просто LONG!
-    public String getLongDate() {
-        long[] time = new long[3];
-        time[0] = longDate / 86400000; //Days
-        time[1] = (longDate / 3600000) - time[0]*24 ; //Hours
-        time[2] = longDate / 60000 - time[1]*60; //Minutes
+    public void setLongDate(Timer t){
+        longDate+=t.getLongDate();
+    }
 
-        return time[0] +" д. " +time[1] +" ч. " +time[2] +" м.";
+    public Calendar getStartDate() {
+        return startDate;
+    }
+
+    //TODO Перенести к клиенту, а тут возвращать просто LONG!
+    public long getLongDate() {
+        return longDate;
+    }
+
+    public boolean oneDay (Timer t){
+        if(this.startDate.getTime().getYear() == t.startDate.getTime().getYear()){
+            if(this.startDate.getTime().getMonth() == t.startDate.getTime().getMonth()){
+                if(this.startDate.getTime().getDay() == t.startDate.getTime().getDay()){
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

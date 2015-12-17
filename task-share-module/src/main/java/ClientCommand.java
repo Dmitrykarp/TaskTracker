@@ -1,6 +1,3 @@
-/**
- * Created by Support on 06.12.2015.
- */
 import java.io.Serializable;
 
 public class ClientCommand implements Serializable {
